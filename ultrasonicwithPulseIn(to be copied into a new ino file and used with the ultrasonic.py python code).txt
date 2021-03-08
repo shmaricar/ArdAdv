@@ -1,0 +1,36 @@
+int trigPin =3;
+// output signal/ping
+int echoPin =2;
+//input signal
+long duration;
+//tracks time it takes for output signal to bounce off an object and return (use pulsein and
+//need to divide by 2)
+long distanceCM;
+//get distance in cm from duration using distance = speed X time formula
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  //rate of communication between Arduino and pc/laptop (9600 signal changes/second =>baudrate)
+  pinMode(trigPin, OUTPUT);
+  //let Arduino know which pin is output
+  pinMode(echoPin, INPUT);
+  //let Arduino know which pin is input
+  
+  
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(trigPin, LOW);
+  digitalWrite(trigPin, HIGH);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distanceCM =duration/29/2;
+  //The speed of sound is: 343m/s = 0.0343 cm/uS = 1/29.1 cm/uS
+  Serial.print(distanceCM);
+  Serial.print("cm");
+  Serial.println();
+  delay(2000);
+
+}
